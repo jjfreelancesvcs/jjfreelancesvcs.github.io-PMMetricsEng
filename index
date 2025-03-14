@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project MADISON: AI vs Human Agents Comparison</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #F0ECE4; /* Warm Grey background */
+      margin: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #fff; /* Pure white container background */
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.07);
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 6px;
+      font-size: 28px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 0;
+      color: #7f8c8d;
+      font-weight: normal;
+      margin-bottom: 25px;
+    }
+    .chart-container {
+      margin: 35px 0;
+      padding: 20px;
+      background: #F0ECE4; /* Warm Grey */
+      border-radius: 8px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .chart-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      background: white;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #eaeaea;
+    }
+    th {
+      background: #f5f5f5; /* Very light gray table headers */
+      color: #333;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85em;
+      letter-spacing: 0.5px;
+    }
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+    .notes {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 30px;
+      line-height: 1.6;
+    }
+    .highlight {
+      background-color: #f9f9f9; /* Very light gray highlight */
+      padding: 18px;
+      border-radius: 8px;
+      border-left: 4px solid #2980b9; /* Blue */
+      margin: 25px 0;
+    }
+    .key-metric {
+      font-weight: bold;
+      color: #2980b9; /* Blue */
+    }
+    .section-divider {
+      height: 1px;
+      background: #e0e0e0;
+      margin: 40px 0;
+    }
+    .key-advantages {
+      font-size: 1.2em; /* Larger text as requested */
+      line-height: 1.8;
+    }
+    .key-advantages li {
+      margin-bottom: 12px;
+    }
+    .table-container {
+      background: white;
+      border-radius: 8px;
+      padding: 1px 15px;
+      margin: 20px 0;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+    }
+    .lg-green {
+      color: #38761d; /* Green for cost breakdown */
+      font-weight: bold; /* Bolded as requested */
+    }
+    .lg-red {
+      color: #A50034; /* Heritage Red */
+    }
+    .chart-title {
+      margin-top: 0;
+      margin-bottom: 5px;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    .chart-subtitle {
+      text-align: center;
+      font-size: 0.9em;
+      margin-bottom: 20px;
+      color: #7f8c8d;
+    }
+    .source-note {
+      font-size: 0.8em;
+      color: #999;
+      text-align: right;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #7f8c8d;
+      font-size: 0.9em;
+    }
+    /* Improved contrast for certain table elements */
+    .highlight-row {
+      background-color: #f6f3ed; /* Lighter Warm Grey */
+    }
+    .total-row {
+      font-weight: bold;
+      background-color: #f8f9fa;
+    }
+    .kpi-text {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1.15em;
+      color: #A50034; /* Changed back to Heritage Red */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Project MADISON: AI vs Human Agents</h1>
+    <h2>Comprehensive Performance & Cost Analysis</h2>
+
+    <div class="highlight">
+      <p><strong>Executive Summary:</strong> A single Tier-2 AI agent can handle the workload of <span class="key-metric">68 human agents</span>, processing <span class="key-metric">2,180 calls per 8-hour shift</span> compared to just 32 calls per human agent. Over 5 years, this results in cost savings of <span class="key-metric">$1.59 million</span> and projected revenue increases of <span class="key-metric">$1.5 million</span>.</p>
+    </div>
+
+    <!-- Section: Agent Performance Comparison (Table instead of chart) -->
+    <div class="chart-container">
+      <h3 class="chart-title">Agent Performance: Calls Handled Per Shift</h3>
+      <p class="chart-subtitle">
+        Based on actual performance data from Project MADISON implementation
+      </p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Performance Metric</th>
+              <th>Tier-2 AI Agent</th>
+              <th>Human Agent</th>
+              <th>Performance Multiplier</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Calls Per Hour</td>
+              <td>272.5</td>
+              <td>4</td>
+              <td class="lg-blue">68.1x</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>Calls Per 8-Hour Shift</td>
+              <td>2,180</td>
+              <td>32</td>
+              <td class="lg-blue">68.1x</td>
+            </tr>
+            <tr>
+              <td>Concurrent Calls</td>
+              <td>50</td>
+              <td>1</td>
+              <td class="lg-blue">50x</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note">Source: LG Electronics Call Center Performance Data, 2024-2025</p>
+    </div>
+
+    <!-- Section: Efficiency Metrics -->
+    <div class="chart-container">
+      <h3 class="chart-title">Efficiency Metrics Comparison</h3>
+      <p class="chart-subtitle">
+        Higher score reflects better performance; metrics normalized on a 0-100 scale
+      </p>
+      <canvas id="efficiencyChart"></canvas>
+      <p class="source-note">Source: Project MADISON Pilot Implementation Results, March 2025</p>
+    </div>
+
+    <!-- Section: Running Costs Over 5 Years -->
+    <div class="chart-container">
+      <h3 class="chart-title">Cumulative Running Costs Over 5 Years</h3>
+      <p class="chart-subtitle">
+        Values represent total operational costs including infrastructure, energy, and maintenance
+      </p>
+      <canvas id="costChart"></canvas>
+      <p class="source-note">Source: Alorica Financial Projection Model, Q1 2025</p>
+    </div>
+
+    <!-- Section: Financial Impact -->
+    <div class="chart-container">
+      <h3 class="chart-title">Total Financial Impact Over 5 Years</h3>
+      <p class="chart-subtitle">
+        Combining cost savings and revenue increases for a comprehensive view of financial benefits
+      </p>
+      <canvas id="impactChart"></canvas>
+      <p class="source-note">Source: LG Electronics/Alorica Joint Business Case Analysis, 2025</p>
+    </div>
+
+    <!-- Detailed Cost Breakdown Table -->
+    <div class="chart-container">
+      <h3 class="chart-title">Detailed 5-Year Cost Breakdown</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Cost Component</th>
+              <th>AI Infrastructure (USD)</th>
+              <th>Human Agents (USD)</th>
+              <th>Savings (USD)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Initial Hardware</td>
+              <td>10,000</td>
+              <td>N/A</td>
+              <td class="lg-green">-10,000</td>
+            </tr>
+            <tr>
+              <td>Tier-1 & Tier-2 AI (5 years)</td>
+              <td>252,000</td>
+              <td>N/A</td>
+              <td class="lg-green">-252,000</td>
+            </tr>
+            <tr>
+              <td>SSD Storage (5 years)</td>
+              <td>57,864</td>
+              <td>N/A</td>
+              <td class="lg-green">-57,864</td>
+            </tr>
+            <tr>
+              <td>Energy Costs (5 years)</td>
+              <td>18,731</td>
+              <td>N/A</td>
+              <td class="lg-green">-18,731</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>Human Labor (68 agents × 5 years)</td>
+              <td>N/A</td>
+              <td>1,917,600</td>
+              <td class="lg-green">1,917,600</td>
+            </tr>
+            <tr class="total-row">
+              <td>Total</td>
+              <td>328,595</td>
+              <td>1,917,600</td>
+              <td class="lg-green">1,589,005</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note">Source: Cost Analysis Based on Current Philippines BPO Market Rates, Q1 2025</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Revenue Increases Table and Chart (Keeping as is since user liked it) -->
+    <div class="chart-container">
+      <h3 class="chart-title">Projected Revenue Increases</h3>
+      <div style="display: flex; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Time Period</th>
+                  <th>Revenue Increase (USD)</th>
+                  <th>Percentage Increase</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>6 Months</td>
+                  <td>100,000</td>
+                  <td>10%</td>
+                </tr>
+                <tr>
+                  <td>1 Year</td>
+                  <td>400,000</td>
+                  <td>40%</td>
+                </tr>
+                <tr class="highlight-row">
+                  <td>3 Years</td>
+                  <td>1,000,000</td>
+                  <td>100%</td>
+                </tr>
+                <tr>
+                  <td>5 Years</td>
+                  <td>1,500,000</td>
+                  <td>150%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div style="flex: 1; min-width: 300px;">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+      <p class="source-note">Source: Revenue Projections Based on Improved Customer Satisfaction and Retention</p>
+    </div>
+
+    <div class="notes">
+      <h3 class="chart-title">Key Operational Advantages</h3>
+      <ul class="key-advantages">
+        <li><span class="kpi-text">Scalability:</span> A single Tier-2 AI agent can handle 50 concurrent calls, each lasting 11 minutes on average, resulting in 272.5 calls/hour or 2,180 calls per 8-hour shift.</li>
+        <li><span class="kpi-text">24/7 Operation:</span> AI agents operate continuously without fatigue, absenteeism, or declining performance, ensuring 99.9% uptime.</li>
+        <li><span class="kpi-text">KPI Excellence:</span> AI agents consistently meet key performance indicators (KPIs) at Six Sigma levels (99.9997%), which is nearly impossible for human agents to maintain.</li>
+        <li><span class="kpi-text">Energy Efficiency:</span> Despite 24/7 operation, the energy costs for AI infrastructure amount to only $18,731 over 5 years, with a modest 2% annual increase.</li>
+        <li><span class="kpi-text">Human Resource Optimization:</span> The remaining human agents (5%) can focus on high-value strategic roles such as process oversight and complex case resolution.</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      <p>© 2025 Project MADISON | LG Electronics / Alorica Teleservices Inc.</p>
+    </div>
+  </div>
+
+  <script>
+    // ------------------------------
+    // 1. Efficiency Metrics Radar Chart
+    // ------------------------------
+    const efficiencyCtx = document.getElementById('efficiencyChart').getContext('2d');
+    new Chart(efficiencyCtx, {
+      type: 'radar',
+      data: {
+        labels: ['AHT Efficiency', 'Resolution Capability', 'Uptime / Availability', 'Scalability', 'KPI Adherence'],
+        datasets: [
+          {
+            label: 'Tier-2 AI Agent',
+            data: [95, 90, 100, 100, 99],
+            backgroundColor: 'rgba(90, 50, 160, 0.2)', // Aesthetic dark purple
+            borderColor: 'rgba(90, 50, 160, 0.8)',
+            pointBackgroundColor: 'rgba(90, 50, 160, 1)'
+          },
+          {
+            label: 'Human Agent',
+            data: [70, 80, 85, 30, 75],
+            backgroundColor: 'rgba(110, 140, 70, 0.2)', // Aesthetic olive green
+            borderColor: 'rgba(110, 140, 70, 0.8)',
+            pointBackgroundColor: 'rgba(110, 140, 70, 1)'
+          }
+        ]
+      },
+      options: {
+        scales: {
+          r: {
+            suggestedMin: 0,
+            suggestedMax: 100,
+            ticks: {
+              display: false
+            },
+            angleLines: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              boxWidth: 15,
+              usePointStyle: true,
+              pointStyle: 'circle'
+            }
+          }
+        }
+      }
+    });
+
+    // ------------------------------
+    // 2. Running Costs Over 5 Years Chart
+    // ------------------------------
+    const costLabels = ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'];
+
+    // AI costs (cumulative)
+    const aiYearlyCosts = [
+      65719, // Year 1 (20% of total)
+      65719, // Year 2 (20% of total)
+      65719, // Year 3 (20% of total)
+      65719, // Year 4 (20% of total)
+      65719  // Year 5 (20% of total)
+    ];
+
+    // Calculate cumulative costs
+    const aiCumulativeCosts = [];
+    aiYearlyCosts.reduce((acc, curr, i) => {
+      aiCumulativeCosts[i] = acc + curr;
+      return aiCumulativeCosts[i];
+    }, 0);
+
+    // Human agent costs (cumulative)
+    const humanYearlyCost = 383520; // Annual cost for 68 agents
+    const humanCumulativeCosts = [
+      humanYearlyCost,
+      humanYearlyCost * 2,
+      humanYearlyCost * 3,
+      humanYearlyCost * 4,
+      humanYearlyCost * 5
+    ];
+
+    const costCtx = document.getElementById('costChart').getContext('2d');
+    new Chart(costCtx, {
+      type: 'line',
+      data: {
+        labels: costLabels,
+        datasets: [
+          {
+            label: 'AI Infrastructure (USD)',
+            data: aiCumulativeCosts,
+            borderColor: 'rgba(90, 50, 160, 1)', // Dark purple
+            backgroundColor: 'rgba(90, 50, 160, 0.1)',
+            tension: 0.3,
+            fill: true,
+            borderWidth: 3
+          },
+          {
+            label: 'Human Agents (USD)',
+            data: humanCumulativeCosts,
+            borderColor: 'rgba(110, 140, 70, 1)', // Olive green
+            backgroundColor: 'rgba(110, 140, 70, 0.1)',
+            tension: 0.3,
+            fill: true,
+            borderWidth: 3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Cumulative Cost (USD)',
+              font: {
+                weight: 'bold'
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            },
+            ticks: {
+              callback: function(value) {
+                return new Intl.NumberFormat('en-US', {
+                  style: 'decimal',
+                  notation: 'compact',
+                  compactDisplay: 'short'
+                }).format(value);
+              }
+            }
+          },
+          x: {
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              boxWidth: 15,
+              usePointStyle: true,
+              pointStyle: 'rectRounded'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + new Intl.NumberFormat('en-US').format(context.parsed.y) + ' USD';
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // ------------------------------
+    // 3. Financial Impact Chart
+    // ------------------------------
+    const impactCtx = document.getElementById('impactChart').getContext('2d');
+    new Chart(impactCtx, {
+      type: 'bar',
+      data: {
+        labels: ['6 Months', '1 Year', '3 Years', '5 Years'],
+        datasets: [
+          {
+            label: 'Cost Savings (USD)',
+            data: [158901, 317801, 953403, 1589005],
+            backgroundColor: 'rgba(90, 50, 160, 0.7)', // Dark purple
+            borderColor: 'rgba(90, 50, 160, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Revenue Increase (USD)',
+            data: [100000, 400000, 1000000, 1500000],
+            backgroundColor: 'rgba(110, 140, 70, 0.7)', // Olive green
+            borderColor: 'rgba(110, 140, 70, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Total Financial Benefit (USD)',
+            data: [258901, 717801, 1953403, 3089005],
+            backgroundColor: 'rgba(165, 0, 52, 0.7)', // Heritage Red
+            borderColor: 'rgba(165, 0, 52, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Amount (USD)',
+              font: {
+                weight: 'bold'
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            },
+            ticks: {
+              callback: function(value) {
+                return new Intl.NumberFormat('en-US', {
+                  style: 'decimal',
+                  notation: 'compact',
+                  compactDisplay: 'short'
+                }).format(value);
+              }
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              boxWidth: 15,
+              usePointStyle: true,
+              pointStyle: 'rectRounded'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + new Intl.NumberFormat('en-US').format(context.parsed.y) + ' USD';
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // ------------------------------
+    // 4. Revenue Chart
+    // ------------------------------
+    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(revenueCtx, {
+      type: 'line',
+      data: {
+        labels: ['6 Months', '1 Year', '3 Years', '5 Years'],
+        datasets: [
+          {
+            label: 'Revenue Increase (USD)',
+            data: [100000, 400000, 1000000, 1500000],
+            borderColor: 'rgba(90, 50, 160, 1)', // Dark purple
+            backgroundColor: 'rgba(90, 50, 160, 0.1)',
+            tension: 0.4,
+            fill: true,
+            borderWidth: 3,
+            yAxisID: 'y'
+          },
+          {
+            label: 'Percentage Increase',
+            data: [10, 40, 100, 150],
+            borderColor: 'rgba(110, 140, 70, 1)', // Olive green
+            backgroundColor: 'rgba(110, 140, 70, 0.1)',
+            tension: 0.4,
+            fill: true,
+            borderWidth: 3,
+            yAxisID: 'y1'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            position: 'left',
+            title: {
+              display: true,
+              text: 'Revenue Increase (USD)',
+              font: {
+                weight: 'bold'
+              }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            },
+            ticks: {
+              callback: function(value) {
+                return new Intl.NumberFormat('en-US', {
+                  style: 'decimal',
+                  notation: 'compact',
+                  compactDisplay: 'short'
+                }).format(value);
+              }
+            }
+          },
+          y1: {
+            beginAtZero: true,
+            position: 'right',
+            title: {
+              display: true,
+              text: 'Percentage Increase (%)',
+              font: {
+                weight: 'bold'
+              }
+            },
+            grid: {
+              drawOnChartArea: false,
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          },
+          x: {
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              boxWidth: 15,
+              usePointStyle: true,
+              pointStyle: 'rectRounded'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                if (context.dataset.label === 'Revenue Increase (USD)') {
+                  return context.dataset.label + ': ' + new Intl.NumberFormat('en-US').format(context.parsed.y) + ' USD';
+                } else {
+                  return context.dataset.label + ': ' + context.parsed.y + '%';
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
