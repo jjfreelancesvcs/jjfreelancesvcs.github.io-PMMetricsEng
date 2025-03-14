@@ -295,7 +295,7 @@
 
     <div class="section-divider"></div>
 
-    <!-- Revenue Increases Table and Chart (Keeping as is since user liked it) -->
+    <!-- Revenue Increases Table and Chart (Modified as requested) -->
     <div class="chart-container">
       <h3 class="chart-title">Projected Revenue Increases</h3>
       <div style="display: flex; flex-wrap: wrap;">
@@ -377,9 +377,9 @@
           {
             label: 'Human Agent',
             data: [70, 80, 85, 30, 75],
-            backgroundColor: 'rgba(110, 140, 70, 0.2)', // Aesthetic olive green
-            borderColor: 'rgba(110, 140, 70, 0.8)',
-            pointBackgroundColor: 'rgba(110, 140, 70, 1)'
+            backgroundColor: 'rgba(140, 180, 90, 0.2)', // Brighter green as requested
+            borderColor: 'rgba(140, 180, 90, 0.8)',
+            pointBackgroundColor: 'rgba(140, 180, 90, 1)'
           }
         ]
       },
@@ -462,8 +462,8 @@
           {
             label: 'Human Agents (USD)',
             data: humanCumulativeCosts,
-            borderColor: 'rgba(110, 140, 70, 1)', // Olive green
-            backgroundColor: 'rgba(110, 140, 70, 0.1)',
+            borderColor: 'rgba(140, 180, 90, 1)', // Brighter green
+            backgroundColor: 'rgba(140, 180, 90, 0.1)',
             tension: 0.3,
             fill: true,
             borderWidth: 3
@@ -542,8 +542,8 @@
           {
             label: 'Revenue Increase (USD)',
             data: [100000, 400000, 1000000, 1500000],
-            backgroundColor: 'rgba(110, 140, 70, 0.7)', // Olive green
-            borderColor: 'rgba(110, 140, 70, 1)',
+            backgroundColor: 'rgba(140, 180, 90, 0.7)', // Brighter green
+            borderColor: 'rgba(140, 180, 90, 1)',
             borderWidth: 1
           },
           {
@@ -609,7 +609,7 @@
     });
 
     // ------------------------------
-    // 4. Revenue Chart
+    // 4. Revenue Chart (Simplified as requested)
     // ------------------------------
     const revenueCtx = document.getElementById('revenueChart').getContext('2d');
     new Chart(revenueCtx, {
@@ -618,24 +618,13 @@
         labels: ['6 Months', '1 Year', '3 Years', '5 Years'],
         datasets: [
           {
-            label: 'Revenue Increase (USD)',
+            label: 'Revenue Growth',
             data: [100000, 400000, 1000000, 1500000],
-            borderColor: 'rgba(90, 50, 160, 1)', // Dark purple
-            backgroundColor: 'rgba(90, 50, 160, 0.1)',
+            borderColor: '#3d87bd', // Sky blue hex as requested
+            backgroundColor: 'rgba(61, 135, 189, 0.1)',
             tension: 0.4,
             fill: true,
-            borderWidth: 3,
-            yAxisID: 'y'
-          },
-          {
-            label: 'Percentage Increase',
-            data: [10, 40, 100, 150],
-            borderColor: 'rgba(110, 140, 70, 1)', // Olive green
-            backgroundColor: 'rgba(110, 140, 70, 0.1)',
-            tension: 0.4,
-            fill: true,
-            borderWidth: 3,
-            yAxisID: 'y1'
+            borderWidth: 3
           }
         ]
       },
@@ -648,7 +637,7 @@
             position: 'left',
             title: {
               display: true,
-              text: 'Revenue Increase (USD)',
+              text: 'Revenue Growth',
               font: {
                 weight: 'bold'
               }
@@ -658,27 +647,12 @@
             },
             ticks: {
               callback: function(value) {
-                return new Intl.NumberFormat('en-US', {
+                return '$' + new Intl.NumberFormat('en-US', {
                   style: 'decimal',
                   notation: 'compact',
                   compactDisplay: 'short'
-                }).format(value);
+                }).format(value) + ' (' + (value / 10000) + '%)';
               }
-            }
-          },
-          y1: {
-            beginAtZero: true,
-            position: 'right',
-            title: {
-              display: true,
-              text: 'Percentage Increase (%)',
-              font: {
-                weight: 'bold'
-              }
-            },
-            grid: {
-              drawOnChartArea: false,
-              color: 'rgba(0, 0, 0, 0.05)'
             }
           },
           x: {
@@ -689,22 +663,13 @@
         },
         plugins: {
           legend: {
-            position: 'bottom',
-            labels: {
-              padding: 20,
-              boxWidth: 15,
-              usePointStyle: true,
-              pointStyle: 'rectRounded'
-            }
+            display: false
           },
           tooltip: {
             callbacks: {
               label: function(context) {
-                if (context.dataset.label === 'Revenue Increase (USD)') {
-                  return context.dataset.label + ': ' + new Intl.NumberFormat('en-US').format(context.parsed.y) + ' USD';
-                } else {
-                  return context.dataset.label + ': ' + context.parsed.y + '%';
-                }
+                return 'Revenue: $' + new Intl.NumberFormat('en-US').format(context.parsed.y) +
+                       ' (' + (context.parsed.y / 10000) + '%)';
               }
             }
           }
@@ -714,4 +679,3 @@
   </script>
 </body>
 </html>
- 
